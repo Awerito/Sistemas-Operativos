@@ -3,16 +3,19 @@
 #include "time.h"
 #define TOTAL 6
 
+// wheels
 struct wheel{
   float diameter;
   char weather[255];
 };
 
+// motor
 struct motor{
   float capacity;
   char fuel[255];
 };
 
+// vehicle
 struct vehicle{
   char name[255];
   char model[255];
