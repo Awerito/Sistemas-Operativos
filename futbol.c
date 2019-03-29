@@ -135,12 +135,12 @@ void autoFillMatches(matchGame partidos[]) {
 
 void showMatches(matchGame partidos[]) {
   for (size_t i = 0; i < TOTAL; i++) {
-    printf("---------------------------------------------------------------------------------\n");
+    printf("------------------------------------------------------------------------------------------------------------------------------\n");
     printf("Estadio: %s\n", partidos[i].stadium);
     printf("Fecha: %d/%d/%d\n", partidos[i].dayMatch.day, partidos[i].dayMatch.month, partidos[i].dayMatch.year);
-    printf("---------------------------------------------------------------------------------\n");
+    printf("------------------------------------------------------------------------------------------------------------------------------\n");
     printf("%s\t\t\t|número\t|goles\t|edad\t\t|%s\t\t|número\t|goles\t|edad\n", partidos[i].team1.name, partidos[i].team2.name);
-    printf("--------------------------------------------------------------------------------\n");
+    printf("-----------------------------------------------------------------------------------------------------------------------------\n");
     for (size_t j = 0; j < 11; j++) {
       printf("%s %s\t\t|%d\t|%d\t|%d\t\t|%s %s\t\t|%d\t|%d\t|%d\n", partidos[i].team1.players[j].firtName,
       partidos[i].team1.players[j].lastName,
@@ -155,7 +155,7 @@ void showMatches(matchGame partidos[]) {
     }
     printf("Promedio\t\t\t\t|%.2f\t\t|Promedio\t\t\t\t|%.2f\n", partidos[i].team1.prom, partidos[i].team2.prom);
   }
-  printf("---------------------------------------------------------------------------------\n");
+  printf("------------------------------------------------------------------------------------------------------------------------------\n");
 }
 
 float promedio(playerGame jugadores[]) {
