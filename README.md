@@ -1,2 +1,2 @@
-# Sistemas-Operativos
-Códigos de ejercicios de Sistemas Operativos
+# Sistemas Operativos
+Materia de Sistemas Operativos
