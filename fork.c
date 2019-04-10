@@ -8,7 +8,7 @@ int main(int argc, char const *argv[]) {
   for (size_t i = 0; i < 3; ++i) {
     (void) display_msg(msg[i]);
   }
-  sleep(2);
+  // sleep(2);
   return 0;
 }
 
