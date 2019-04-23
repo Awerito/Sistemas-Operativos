@@ -9,16 +9,12 @@ typedef struct n {
   struct n* next;
 }*node;
 
-/*
-isEmpty(queue);
-*/
+/* isEmpty(queue); */
 bool isEmpty(node queue) {
   return (queue == NULL);
 }
 
-/*
-showQueue(queue);
-*/
+/* showQueue(queue); */
 void showQueue(node queue) {
   node aux = queue;
 
@@ -33,9 +29,7 @@ void showQueue(node queue) {
   printf("]\n");
 }
 
-/*
-queue = push(queue, value);
-*/
+/* queue = push(queue, value); */
 node push(node queue, int value) {
   node aux = queue;
 
@@ -54,9 +48,7 @@ node push(node queue, int value) {
   }
 }
 
-/*
-queue = pop(queue);
-*/
+/* queue = pop(queue); */
 node pop(node queue) {
   if(!isEmpty(queue)){
     return queue->next;
