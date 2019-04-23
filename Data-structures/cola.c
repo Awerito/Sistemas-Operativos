@@ -55,6 +55,31 @@ node pop(node queue) {
   }
 }
 
+/* queue = swap(queue, value1, value2) */
+node swap(node queue, int value1, int value2) {
+  node aux1 = queue, aux2 = queue;
+  while(value1 != aux1->data) {
+    aux1 = aux1->next;
+  }
+  while(value2 != aux2->data) {
+    aux2 = aux2->next;
+  }
+  aux1->data = value2;
+  aux2->data = value1;
+
+  return queue;
+}
+
+/* valueOf(queue, index) */
+int valueOf(node queue, int index) {
+  node aux = queue;
+  while (index != 0) {
+    aux = aux->next;
+    index--;
+  }
+  return aux->data;
+}
+
 /* El main donde esta toh pahando */
 int main() {
   /*Ejemplo*/
@@ -63,16 +88,8 @@ int main() {
   for (size_t i = 0; i < 5; i++) {
     cola = push(cola, i);
   }
-  showQueue(cola);
-  cola = pop(cola);
-  showQueue(cola);
-  cola = pop(cola);
-  showQueue(cola);
-  cola = pop(cola);
-  showQueue(cola);
-  cola = pop(cola);
-  showQueue(cola);
-  cola = pop(cola);
+  cola = swap(cola, 1, 3);
+  printf("%d\n", valueOf(cola, 3));
   showQueue(cola);
   return 0;
   /*Ejemplo*/
