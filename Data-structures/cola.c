@@ -55,7 +55,7 @@ node pop(node queue) {
   }
 }
 
-/* El main donde esta toh pasando */
+/* El main donde esta toh pahando */
 int main() {
   /*Ejemplo*/
   srand(time(NULL));
