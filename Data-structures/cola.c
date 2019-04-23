@@ -3,22 +3,23 @@
 #include "stdbool.h"
 #include "time.h"
 
+/* Estructura nodo */
 typedef struct n {
   int data;
   struct n* next;
 }*node;
 
+/*
+isEmpty(queue);
+*/
 bool isEmpty(node queue) {
-  /*
-    isEmpty(queue);
-  */
   return (queue == NULL);
 }
 
+/*
+showQueue(queue);
+*/
 void showQueue(node queue) {
-  /*
-    showQueue(queue);
-  */
   node aux = queue;
 
   printf("[");
@@ -32,10 +33,10 @@ void showQueue(node queue) {
   printf("]\n");
 }
 
+/*
+queue = push(queue, value);
+*/
 node push(node queue, int value) {
-  /*
-    queue = push(queue, value);
-  */
   node aux = queue;
 
   node newNode = (node) malloc(sizeof(struct n));
@@ -53,15 +54,16 @@ node push(node queue, int value) {
   }
 }
 
+/*
+queue = pop(queue);
+*/
 node pop(node queue) {
-  /*
-    queue = pop(queue);
-  */
   if(!isEmpty(queue)){
     return queue->next;
   }
 }
 
+/* El main donde esta toh pasando */
 int main() {
   /*Ejemplo*/
   srand(time(NULL));
