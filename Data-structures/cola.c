@@ -80,16 +80,32 @@ int valueOf(node queue, int index) {
   return aux->data;
 }
 
+void quicksort(node queue, int l, int r) {
+  if(l >= r) {
+    return;
+  }
+  int pivot = valueOf(queue, r);
+  int cnt = l;
+  for (int i = l; i <= r; i++) {
+    if (valueOf(queue, i) <= pivot) {
+      queue = swap(queue, valueOf(queue, cnt), valueOf(queue, i));
+      cnt++;
+    }
+  }
+  quicksort(queue, l, cnt-2);
+  quicksort(queue, cnt, r);
+}
+
 /* El main donde esta toh pahando */
 int main() {
   /*Ejemplo*/
   srand(time(NULL));
   node cola = NULL;
-  for (size_t i = 0; i < 5; i++) {
-    cola = push(cola, i);
+  for (size_t i = 0; i < 20; i++) {
+    cola = push(cola, rand()%101);
   }
-  cola = swap(cola, 1, 3);
-  printf("%d\n", valueOf(cola, 3));
+  showQueue(cola);
+  quicksort(cola, 0, 19);
   showQueue(cola);
   return 0;
   /*Ejemplo*/
