@@ -31,18 +31,18 @@ void showQueue(node queue) {
   printf("]\n");
 }
 
-/* showFrontData(queue); */
-int showFrontData(node queue) {
+/* showData(queue); */
+int getData(node queue) {
   return queue->data;
 }
 
-/* showFrontPID(queue); */
-int showFrontPID(node queue) {
+/* getPID(queue); */
+int getPID(node queue) {
   return queue->pid;
 }
 
-/* showFrontCount(queue); */
-int showFrontCount(node queue) {
+/* getCount(queue); */
+int getCount(node queue) {
   return queue->count;
 }
 
@@ -121,36 +121,22 @@ int main() {
   srand(time(NULL));
   int quantum = 10;
   node pendientes = NULL;
-  for (size_t i = 0; i < 4; i++) {
+  for (size_t i = 0; i < 10; i++) {
     pendientes = push(pendientes, rand()%100, rand()%25, 0);
   }
   showQueue(pendientes);
 
   node terminadas = NULL;
-  if (isEmpty(terminadas)) {
-    printf("vacia\n");
-  } else {
-    printf("llena\n");
-  }
-  terminadas = push(pendientes, showFrontData(pendientes), showFrontPID(pendientes), showFrontCount(pendientes) + 1);
-  pop(terminadas);
-  if (isEmpty(terminadas)) {
-    printf("vacia\n");
-  } else {
-    showQueue(terminadas);
-    printf("llena\n");
+  while (!isEmpty(pendientes)) {
+    int aux = getData(pendientes) - quantum;
+    if (aux > 0) {
+      pendientes = push(pendientes, aux, getPID(pendientes), getCount(pendientes) + 1);
+    } else {
+      terminadas = push(terminadas, aux, getPID(pendientes), getCount(pendientes) + 1);
+    }
+    pendientes = pop(pendientes);
   }
 
-  // while (!isEmpty(pendientes)) {
-  //   int aux = showFrontData(pendientes) - quantum;
-  //   if (aux > 0) {
-  //     pendientes = push(pendientes, aux, showFrontPID(pendientes), showFrontCount(pendientes) + 1);
-  //   } else {
-  //     terminadas = push(pendientes, aux, showFrontPID(pendientes), showFrontCount(pendientes) + 1);
-  //   }
-  //   pendientes = pop(pendientes);
-  // }
-  showQueue(pendientes);
   showQueue(terminadas);
   return 0;
   /*Ejemplo*/
