@@ -122,7 +122,7 @@ int main() {
   int quantum = 10;
   node pendientes = NULL;
   for (size_t i = 0; i < 10; i++) {
-    pendientes = push(pendientes, rand()%100, rand()%25, 0);
+    pendientes = push(pendientes, rand()%100, i + 1, 0);
   }
   showQueue(pendientes);
 
@@ -138,6 +138,10 @@ int main() {
   }
 
   showQueue(terminadas);
+
+  printf("---------------------------------------------------------------\n", );
+  
+  printf("---------------------------------------------------------------\n", );
   return 0;
   /*Ejemplo*/
 }
