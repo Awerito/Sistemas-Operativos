@@ -2,6 +2,8 @@
 #include "stdlib.h"
 #include "stdbool.h"
 #include "time.h"
+#define TOTAL 5
+#define QUANTUM 10
 
 /* Estructura nodo */
 typedef struct n {
@@ -29,6 +31,21 @@ void showQueue(node queue) {
     aux = aux->next;
   }
   printf("]\n");
+}
+
+/* showTableData(queue) */
+void showTableData(node queue) {
+  node aux = queue;
+
+  printf("----------------------------------\n");
+  printf("ID\tTiempo Asignado\n");
+  printf("----------------------------------\n");
+
+  while (aux != NULL) {
+    printf("%d\t%d\n", aux->pid, aux->data);
+    aux = aux->next;
+  }
+  printf("----------------------------------\n");
 }
 
 /* showData(queue); */
@@ -117,18 +134,16 @@ int pidOf(node queue, int index) {
 
 /* El main donde esta toh pahando */
 int main() {
-  /*Ejemplo*/
   srand(time(NULL));
-  int quantum = 10;
   node pendientes = NULL;
-  for (size_t i = 0; i < 10; i++) {
+  for (size_t i = 0; i < TOTAL; i++) {
     pendientes = push(pendientes, rand()%100, i + 1, 0);
   }
-  showQueue(pendientes);
+  showTableData(pendientes);
 
   node terminadas = NULL;
   while (!isEmpty(pendientes)) {
-    int aux = getData(pendientes) - quantum;
+    int aux = getData(pendientes) - QUANTUM;
     if (aux > 0) {
       pendientes = push(pendientes, aux, getPID(pendientes), getCount(pendientes) + 1);
     } else {
@@ -137,11 +152,20 @@ int main() {
     pendientes = pop(pendientes);
   }
 
-  showQueue(terminadas);
+  //showQueue(terminadas);
 
-  printf("---------------------------------------------------------------\n", );
-  
-  printf("---------------------------------------------------------------\n", );
+  node auxiliar = terminadas;
+  printf("---------------------------------------------------------------\n");
+  printf("PID Proceso\tTiempo CPU\tPasadas CPU\tTiempo Sobrante\n");
+  printf("---------------------------------------------------------------\n");
+  while(!isEmpty(auxiliar)) {
+    int pid = getPID(auxiliar);
+    int tiempo = getCount(auxiliar) * QUANTUM;
+    int pasadas = getCount(auxiliar);
+    int espera = (-1) * getData(auxiliar);
+    printf("%d\t\t%d\t\t%d\t\t%d\n", pid, tiempo, pasadas, espera);
+    auxiliar = pop(auxiliar);
+  }
+  printf("---------------------------------------------------------------\n");
   return 0;
-  /*Ejemplo*/
 }
