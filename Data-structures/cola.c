@@ -1,3 +1,10 @@
+/*
+Alvaro Cardenas
+Sebastian Vidal
+Victor Rodriguez
+Diego Muñoz
+Felipe Maldonado
+*/
 #include "stdio.h"
 #include "stdlib.h"
 #include "stdbool.h"
