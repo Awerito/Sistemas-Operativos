@@ -14,7 +14,7 @@
 #include <unistd.h>
 #include <stdbool.h>
 #include <string.h>
-#define  TOTAL 6
+#define  TOTAL 4
 
 /* Node structure */
 typedef struct n {
@@ -22,6 +22,8 @@ typedef struct n {
   int time, memory, id;
   struct n* next;
 }*node;
+
+node endedTask;
 
 /* isEmpty(queue); */
 bool isEmpty(node queue) {
@@ -104,6 +106,39 @@ int main(int argc, char const *argv[]) {
   }
 
   showQueue(tasks);
+
+  int thread_number;
+
+  printf("How many cores you want to use: \n");
+  scanf("%d", &thread_number);
+
+  pthread_t threads[thread_number];
+
+  while (!isEmpty(tasks)) {
+    for (size_t i = 0; i < thread_number; i++) {
+      printf("Proceso\n");
+      pthread_create(&threads[i], NULL, inProcess, (void *) &tasks);
+      endedTask = push(
+        endedTask,
+        getID(tasks),
+        getMemory(tasks),
+        getTime(tasks)
+      );
+      tasks = pop(tasks);
+      if (isEmpty(tasks)) {
+        break;
+      }
+    }
+    for (size_t i = 0; i < thread_number; i++) {
+      printf("Fin Proceso\n");
+      pthread_join(threads[i], NULL);
+      if (isEmpty(tasks)) {
+        break;
+      }
+    }
+  }
+
+
 
   //pthread_t thread1, thread2, thread3, thread4;
 
