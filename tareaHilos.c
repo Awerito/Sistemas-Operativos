@@ -86,13 +86,15 @@ node pop(node queue) {
     }
     return queue->next;
   }
+  return NULL;
 }
 
 void *inProcess(void *data) {
   node p = (node) data;
   fflush(stdout);
   sleep(p->time);
-  printf("Process %d finish in %d seconds\n", p->id, p->time);
+  printf("Process %d finish in %d seconds\n", (int) p->id, (int) p->time);
+  return NULL;
 }
 
 int main(int argc, char const *argv[]) {
@@ -115,21 +117,27 @@ int main(int argc, char const *argv[]) {
   pthread_t threads[thread_number];
 
   while (!isEmpty(tasks)) {
+    int thread_counter = 0;
     for (size_t i = 0; i < thread_number; i++) {
-      printf("Proceso\n");
-      pthread_create(&threads[i], NULL, inProcess, (void *) &tasks);
-      endedTask = push(
-        endedTask,
-        getID(tasks),
-        getMemory(tasks),
-        getTime(tasks)
-      );
-      tasks = pop(tasks);
       if (isEmpty(tasks)) {
         break;
+      } else {
+        printf("Proceso\n");
+        pthread_create(&threads[i], NULL, inProcess, (void *) tasks);
+        thread_counter++;
+        endedTask = push(
+          endedTask,
+          getID(tasks),
+          getMemory(tasks),
+          getTime(tasks)
+        );
+        tasks = pop(tasks);
+        showQueue(tasks);
       }
     }
-    for (size_t i = 0; i < thread_number; i++) {
+    printf("Terminadas\n");
+    showQueue(endedTask);
+    for (size_t i = 0; i < thread_counter; i++) {
       printf("Fin Proceso\n");
       pthread_join(threads[i], NULL);
       if (isEmpty(tasks)) {
