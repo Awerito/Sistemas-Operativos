@@ -145,13 +145,7 @@ int main(int argc, char const *argv[]) {
       }
     }
   }
-
-
-
-  //pthread_t thread1, thread2, thread3, thread4;
-
-  // pthread_create(&thread1, NULL, inProcess, (void *) &task1);
-  // pthread_join(thread1, NULL);
-  // printf("\n");
   return 0;
 }
+
+/* AUTHOR: Diego Ignacio Muñoz Viveros */
